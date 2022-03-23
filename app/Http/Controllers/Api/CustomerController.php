@@ -17,7 +17,7 @@ class CustomerController extends Controller
      */
     public function index():AnonymousResourceCollection
     {
-        return CustomerResource::collection(Customer::all());
+        return CustomerResource::collection(Customer::latest()->get());
     }
 
     /**
@@ -28,7 +28,11 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Customer::create([
+            'name' => $request->name,
+            'tel' => $request->tel,
+            'is_favourite' => $request->is_favourite,
+        ]);
     }
 
     /**

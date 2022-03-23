@@ -9,8 +9,13 @@ export default function useCustomers() {
         customers.value = response.data.data;
     };
 
+    const createCustomer = async (data) => {
+        await axios.post("/api/customers", data);
+    };
+
     return {
         customers,
         getCustomers,
+        createCustomer,
     };
 }
