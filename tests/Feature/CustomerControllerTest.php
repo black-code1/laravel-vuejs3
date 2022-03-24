@@ -15,6 +15,7 @@ class CustomerControllerTest extends TestCase
      */
     public function itListsCustomers()
     {
+        $this->seed();
         $response = $this->get('/api/customers');
 
         $response->assertStatus(200);
@@ -40,5 +41,18 @@ class CustomerControllerTest extends TestCase
         $this->assertEquals(1,$customers->count());
         $this->assertEquals('Mon premier client',$customer->name);
 
+    }
+
+    /**
+     * @test
+     */
+    public function itValidatesFields(){
+        $response = $this->post('/api/customers',[
+            'name'=>'',
+            'tel'=>'',
+            'is_favourite'=>''
+        ]);
+
+        $response->assertSessionHasErrors(['name','tel','is_favourite']);
     }
 }

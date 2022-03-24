@@ -1,4 +1,7 @@
 <template>
+    <div v-if="errors !== ''">
+        {{ errors }}
+    </div>
     <form class="space-y-6" @submit.prevent="storeCustomer">
         <div>
             <label for="name" class="block">Nom du client</label>
@@ -24,7 +27,6 @@
 
 <script>
 import { reactive } from "vue";
-import router from "../router/index.js";
 import useCustomers from "../services/customerservices.js";
 export default {
     setup() {
@@ -34,15 +36,15 @@ export default {
             is_favourite: "",
         });
 
-        const { createCustomer } = useCustomers();
+        const { createCustomer, errors } = useCustomers();
 
         const storeCustomer = async () => {
             await createCustomer({ ...form });
-            router.push({ name: "customers.index" });
         };
 
         return {
             form,
+            errors,
             storeCustomer,
         };
     },

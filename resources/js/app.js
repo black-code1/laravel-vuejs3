@@ -8,9 +8,9 @@ Alpine.start();
 
 import { createApp } from "vue";
 
+import router from "./router";
 import CustomerIndex from "./components/CustomerIndex.vue";
 
-import router from "./router";
 createApp({
     components: {
         CustomerIndex,
