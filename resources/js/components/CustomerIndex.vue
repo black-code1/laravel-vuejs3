@@ -36,9 +36,9 @@
                                     Is Favourite ?
                                 </th>
 
-                                <!-- <th scope="col" class="relative px-6 py-3">
-                                    <span class="sr-only">Edit</span>
-                                </th> -->
+                                <th scope="col" class="relative px-6 py-3">
+                                    <span class="sr-only">Actions</span>
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -83,6 +83,18 @@
                                         >
                                         </span>
                                     </td>
+                                    <td
+                                        class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                                    >
+                                        <router-link
+                                            :to="{
+                                                name: 'customers.edit',
+                                                params: { id: customer.id },
+                                            }"
+                                            class="text-indigo-600 hover:text-indigo-900"
+                                            >Editer</router-link
+                                        >
+                                    </td>
                                 </tr>
                             </template>
                         </tbody>
@@ -94,7 +106,7 @@
 </template>
 
 <script>
-import { onMounted } from "@vue/runtime-core";
+import { onMounted } from "vue";
 import useCustomers from "../services/customerservices.js";
 
 export default {

@@ -46,6 +46,26 @@ class CustomerControllerTest extends TestCase
     /**
      * @test
      */
+    public function itUpdatesCustomer(){
+        $this->seed();
+
+        $customer = Customer::first();
+
+        $response = $this->put('/api/customers/' .$customer->id,[
+            'name' => 'Nom Edite',
+            'tel' => '06xxx',
+            'is_favourite' => true,
+        ]);
+
+        $updateCustomer = Customer::find($customer->id);
+
+        $response->assertStatus(200);
+        $this->assertEquals('Nom Edite', $updateCustomer->name);
+    }
+
+    /**
+     * @test
+     */
     public function itValidatesFields(){
         $response = $this->post('/api/customers',[
             'name'=>'',

@@ -48,7 +48,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return CustomerResource::make($customer);
     }
 
     /**
@@ -60,7 +60,13 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'tel'=>'required',
+            'is_favourite'=>'required|boolean'
+        ]);
+
+        $customer->update($request->only(['name','tel','is_favourite']));
     }
 
     /**
